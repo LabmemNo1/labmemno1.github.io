@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on My New Hugo Site</title>
+    <link>https://labmemno1.github.io/post/</link>
+    <description>Recent content in Posts on My New Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 11 Oct 2019 22:30:17 +0800</lastBuildDate>
+    
+	<atom:link href="https://labmemno1.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>HUGO教程</title>
+      <link>https://labmemno1.github.io/post/blog/</link>
+      <pubDate>Fri, 11 Oct 2019 22:30:17 +0800</pubDate>
+      
+      <guid>https://labmemno1.github.io/post/blog/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://i.bmp.ovh/imgs/2019/10/edf9c4601b1266df.png&#34; alt=&#34;hugo的图片&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
