@@ -1,23 +1,78 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on My New Hugo Site</title>
-    <link>https://labmemno1.github.io/post/</link>
-    <description>Recent content in Posts on My New Hugo Site</description>
+    <title>Posts on </title>
+    <link>https://example.org/post/</link>
+    <description>Recent content in Posts on </description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Fri, 11 Oct 2019 22:30:17 +0800</lastBuildDate>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 26 Oct 2019 17:07:53 +0800</lastBuildDate>
     
-	<atom:link href="https://labmemno1.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://example.org/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>栈的学习-中缀表达式求值及转换为后缀表达式</title>
+      <link>https://example.org/post/datas/</link>
+      <pubDate>Sat, 26 Oct 2019 17:07:53 +0800</pubDate>
+      
+      <guid>https://example.org/post/datas/</guid>
+      <description>&lt;h1 id=&#34;中缀表达式求值及转换为后缀表达式&#34;&gt;中缀表达式求值及转换为后缀表达式&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;利用栈的延迟缓冲的特性&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;Primer12</title>
+      <link>https://example.org/post/c&#43;&#43;primer12.3/</link>
+      <pubDate>Tue, 22 Oct 2019 17:47:00 +0800</pubDate>
+      
+      <guid>https://example.org/post/c&#43;&#43;primer12.3/</guid>
+      <description>第12.3节总结 花了一下午的时间学习第十二章第三节，使用标准库的文本查询程序，总体就是把之前学的知识融会贯通，比如关联容器智能指针流输入等等</description>
+    </item>
+    
+    <item>
+      <title>我想告诉自己及正在学习中的人</title>
+      <link>https://example.org/post/ganwu/</link>
+      <pubDate>Sun, 20 Oct 2019 15:09:46 +0800</pubDate>
+      
+      <guid>https://example.org/post/ganwu/</guid>
+      <description>&lt;h1 id=&#34;我的感想&#34;&gt;我的感想&lt;/h1&gt;</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;学习之动态内存与智能指针</title>
+      <link>https://example.org/post/cpp2/</link>
+      <pubDate>Sat, 19 Oct 2019 14:43:03 +0800</pubDate>
+      
+      <guid>https://example.org/post/cpp2/</guid>
+      <description>&lt;h1 id=&#34;记录c-primer的学习历程&#34;&gt;记录C++Primer的学习历程&lt;/h1&gt;
+
+&lt;h2 id=&#34;动态内存和智能指针&#34;&gt;动态内存和智能指针&lt;/h2&gt;</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;学习之泛型算法</title>
+      <link>https://example.org/post/c&#43;&#43;/</link>
+      <pubDate>Sun, 13 Oct 2019 16:33:36 +0800</pubDate>
+      
+      <guid>https://example.org/post/c&#43;&#43;/</guid>
+      <description>&lt;h1 id=&#34;记录c-primer的学习历程&#34;&gt;记录C++Primer的学习历程&lt;/h1&gt;
+
+&lt;h2 id=&#34;泛型算法&#34;&gt;泛型算法&lt;/h2&gt;</description>
+    </item>
+    
+    <item>
       <title>HUGO教程</title>
-      <link>https://labmemno1.github.io/post/blog/</link>
+      <link>https://example.org/post/blog/</link>
       <pubDate>Fri, 11 Oct 2019 22:30:17 +0800</pubDate>
       
-      <guid>https://labmemno1.github.io/post/blog/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://i.bmp.ovh/imgs/2019/10/edf9c4601b1266df.png&#34; alt=&#34;hugo的图片&#34; /&gt;&lt;/p&gt;</description>
+      <guid>https://example.org/post/blog/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://i.bmp.ovh/imgs/2019/10/edf9c4601b1266df.png&#34; alt=&#34;hugo的图片&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;1-下载hugo和git&#34;&gt;1.下载HUGO和GIT&lt;/h1&gt;</description>
     </item>
     
   </channel>
