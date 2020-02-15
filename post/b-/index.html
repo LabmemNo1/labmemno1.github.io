@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>栈的学习-中缀表达式求值及转换为后缀表达式 - </title>
+  <title>B-Tree  - </title>
   
 
 <meta name="renderer" content="webkit" />
@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="Kurisu" />
-  <meta name="description" content="中缀表达式求值及转换为后缀表达式  利用栈的延迟缓冲的特性 " />
+  <meta name="description" content="B-树 基础定义不再写了，把b-树的各种算法记录一下 在这里补充一下，b-树的节点类中，存放关键码和孩子节点是使用vector来存放的 搜索算法 1" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -35,7 +35,7 @@
 <meta name="generator" content="Hugo 0.58.3" />
 
 
-<link rel="canonical" href="https://example.org/post/datas/" />
+<link rel="canonical" href="https://example.org/post/b-/" />
 
 
 
@@ -59,38 +59,26 @@
 
 
 
-<meta property="og:title" content="栈的学习-中缀表达式求值及转换为后缀表达式" />
-<meta property="og:description" content="中缀表达式求值及转换为后缀表达式
-
-
-利用栈的延迟缓冲的特性
-" />
+<meta property="og:title" content="B-Tree " />
+<meta property="og:description" content="B-树 基础定义不再写了，把b-树的各种算法记录一下 在这里补充一下，b-树的节点类中，存放关键码和孩子节点是使用vector来存放的 搜索算法 1" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://example.org/post/datas/" />
-<meta property="article:published_time" content="2019-10-26T17:07:53+08:00" />
-<meta property="article:modified_time" content="2019-10-26T17:07:53+08:00" />
-<meta itemprop="name" content="栈的学习-中缀表达式求值及转换为后缀表达式">
-<meta itemprop="description" content="中缀表达式求值及转换为后缀表达式
+<meta property="og:url" content="https://example.org/post/b-/" />
+<meta property="article:published_time" content="2019-11-12T15:36:24+08:00" />
+<meta property="article:modified_time" content="2019-11-12T15:36:24+08:00" />
+<meta itemprop="name" content="B-Tree ">
+<meta itemprop="description" content="B-树 基础定义不再写了，把b-树的各种算法记录一下 在这里补充一下，b-树的节点类中，存放关键码和孩子节点是使用vector来存放的 搜索算法 1">
 
 
-利用栈的延迟缓冲的特性
-">
-
-
-<meta itemprop="datePublished" content="2019-10-26T17:07:53&#43;08:00" />
-<meta itemprop="dateModified" content="2019-10-26T17:07:53&#43;08:00" />
-<meta itemprop="wordCount" content="1593">
+<meta itemprop="datePublished" content="2019-11-12T15:36:24&#43;08:00" />
+<meta itemprop="dateModified" content="2019-11-12T15:36:24&#43;08:00" />
+<meta itemprop="wordCount" content="2673">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="栈的学习-中缀表达式求值及转换为后缀表达式"/>
-<meta name="twitter:description" content="中缀表达式求值及转换为后缀表达式
-
-
-利用栈的延迟缓冲的特性
-"/>
+<meta name="twitter:title" content="B-Tree "/>
+<meta name="twitter:description" content="B-树 基础定义不再写了，把b-树的各种算法记录一下 在这里补充一下，b-树的节点类中，存放关键码和孩子节点是使用vector来存放的 搜索算法 1"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -334,15 +322,15 @@
           <article class="post bg-white">
     
     <header class="post-header">
-      <h1 class="post-title">栈的学习-中缀表达式求值及转换为后缀表达式</h1>
+      <h1 class="post-title">B-Tree </h1>
       
       <div class="post-meta">
-        <time datetime="2019-10-26" class="post-time">
-          2019-10-26
+        <time datetime="2019-11-12" class="post-time">
+          2019-11-12
         </time>
         
-        <span class="more-meta"> 1593 words </span>
-          <span class="more-meta"> 4 min read </span>
+        <span class="more-meta"> 2673 words </span>
+          <span class="more-meta"> 6 min read </span>
 
         
         
@@ -359,7 +347,15 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#中缀表达式求值及转换为后缀表达式">中缀表达式求值及转换为后缀表达式</a></li>
+<li>
+<ul>
+<li><a href="#b-树">B-树</a>
+<ul>
+<li><a href="#搜索算法">搜索算法</a></li>
+<li><a href="#插入算法-上溢处理">插入算法 （上溢处理）</a></li>
+<li><a href="#删除算法-下溢处理">删除算法（下溢处理）</a></li>
+</ul></li>
+</ul></li>
 </ul>
 </nav>
   </div>
@@ -367,13 +363,76 @@
 
     
     <div class="post-content">
-      <h1 id="中缀表达式求值及转换为后缀表达式">中缀表达式求值及转换为后缀表达式</h1>
+      
 
-<ul>
-<li>利用栈的延迟缓冲的特性</li>
-</ul>
+<h2 id="b-树">B-树</h2>
 
-<p>首先我们要将不同运算符之间的关系确定成一张二维表格</p>
+<p>基础定义不再写了，把b-树的各种算法记录一下
+在这里补充一下，b-树的节点类中，存放关键码和孩子节点是使用vector来存放的</p>
+
+<h3 id="搜索算法">搜索算法</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">	BTNodePosi(T) search(const T&amp; e)//查找
+	{
+		BTNodePosi(T) = _root; _hot = NULL;
+		while (v)
+		{
+			Rank r = v-&gt;key.search(e);//在关键码向量中查找e
+			if (r &gt;= 0 &amp;&amp; e == v-&gt;key[r]) return v;//如果成功 就返回这个这个节点
+			_hot = v;//否则 先记录下这个v
+			v = v-&gt;child[r + 1];//让v沿着孩子引用向量去指向下一层
+
+		}//while结束 如果因为!v结束 则意味抵达外部节点
+		return NULL;
+	}</pre></td></tr></table>
+</div>
+</div>
+<h3 id="插入算法-上溢处理">插入算法 （上溢处理）</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">bool insert(const T&amp; e)//插入
+	{
+		BTNodePosi(T) v = search(e);
+		if (v); return false;//确认e不存在
+		Rank r = _hot-&gt;key.search(e);//搜索完之后 _hot是最后一个节点 ，也就是叶子向量，在这里面搜索e，确定不大于e的最大值
+		_hot-&gt;key.insert(r + 1, e);
+		_hot-&gt;child.insert(r + 2, NULL);//外部节点 插入一个空的
+		_size++;
+		solveOverflow(_hot);//因为插入一个关键码可能会导致b树与原来的阶次不符合 导致上溢
+		return ture;
+	}</pre></td></tr></table>
+</div>
+</div>
+<p>上溢处理算法</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt"> 1
@@ -396,37 +455,74 @@
 </span><span class="lnt">18
 </span><span class="lnt">19
 </span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">#define N_OPTR 9//运算总数  
-typedef enum{ADD,SUB,MUL,DIV,POW,FAC,L_P,R_P,EOE} Operator;
-//运算符优先关系二维表格
-const char pri[N_OPTR][N_OPTR] = {
-	/*				当前运算符                    */
-/*		         +    -    *    /    ^    !    (    )    \0 */
-/*	-- + */		&#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;,
-/*	|  - */		&#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;,
-/*	栈 * */		&#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;,
-/*	顶 / */		&#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;,
-/*	运 ^ */		&#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;,
-/*	算 ! */		&#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39; &#39;, &#39;&gt;&#39;, &#39;&gt;&#39;,
-/*	符 ( */		&#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;=&#39;, &#39; &#39;,
-/*	|  ) */		&#39; &#39;, &#39; &#39;, &#39; &#39;, &#39; &#39;, &#39; &#39;, &#39; &#39;, &#39; &#39;, &#39; &#39;, &#39; &#39;,
-/*	--\0 */		&#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39; &#39;, &#39;=&#39;
+<pre class="chroma">void solveOverflow(BTNodePosi(T) v)//因插入而上溢之后的分裂处理
+	{
+		if (_order &gt;= v-&gt;child.size()) return;//递归基 阶次大于等于分支数量 说明没有上溢
+		Rank s = _order / 2;//轴点 （此时_order=key.size()=child.size()-1）
+		BTNodePosi(T) u = new BTNode&lt;T&gt;();//注意b树节点构造函数  有一个空的孩子
+		for (Rank j = 0; j &lt; _order - s - 1; j++)//v右侧_order-s-1个孩子和关键码分裂到右侧节点u
+		{
+			u-&gt;child.insert(j, v-&gt;child.remove(s + 1));//s是中间轴点 轴点+1移除，右边会补过来，一直把s+1移到u里，u是右侧节点
+			u-&gt;key.insert(j, v-&gt;key.remove(s + 1));
+		}
+		u-&gt;child[_order - s - 1] = v-&gt;child.remove(s + 1);//移动v最靠右的孩子
+		if (u-&gt;child[0])//如果u的孩子们非空
+			for (Rank j = 0; j &lt; _order - s; j++)//令他们的父节点统一
+				u-&gt;child[j]-&gt;parent = u;
+		BTNodePosi(T) p = v-&gt;parent;//v当前父节点p
+		if (!p) { _root = p = new BTNode&lt;T&gt;(); p-&gt;child[0] = v; v-&gt;parent = p; }//如果p不存在 说明v之前是根节点 创建一个新跟节点 p的左孩子就是相对小的v
+		Rank r = 1 + p-&gt;key.search(v-&gt;key[0]);//p中指向u指针的秩  就是指向要对 要节点左边小 右边大 去找到这个 然后+1
+		p-&gt;key.insert(r, v-&gt;key.remove(s));//轴点的关键码上升了
+		p-&gt;child.insert(r + 1, u); u-&gt;parent = p;//新创建的u节点（右节点）与p互联
+		solveOverflow(p);//上升一层 如有必要 继续分裂
 
-
-
-
-};</pre></td></tr></table>
+	}</pre></td></tr></table>
 </div>
 </div>
-<p>然后写主程序，主程序的流程是这样的，我们需要一个运算符栈和一个运算数栈，先将一个&rsquo;\0&rsquo;入栈当做哨兵，然后已运算符栈不为空为条件当做循环，判断当前字符是运算数还是运算符。</p>
+<h3 id="删除算法-下溢处理">删除算法（下溢处理）</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">bool insert(const T&amp;e)//删除
+	{
+		BTNodePosi(T) v = search(e);//先定位e
+		if (!v) return false;//如果e不存在 则不能执行删除操作 返回失败
+		Rank r = v-&gt;key.search(e);//确定关键码的秩
+		if (v-&gt;child[0])//如果v有孩子向量 那么，就不是叶子，我们希望v是叶子节点
+		{
+			BTNodePosi(T) u = v-&gt;child[r+1];//从u的右子树中找到待删除关键码的直接后继
+			while (u-&gt;child[0])u = u-&gt;child[0];//在右子树中往左深入
+			v-&gt;key[r] = u-&gt;key[0]; v = u; r = 0;//互换位置，先把v指向的节点中的关键码换为我们找到的直接后继，然后令v指向u这个叶节点
+		}//至此，v必然位于最底层，而且其中的第r个关键码就是待删除者 （因为是叶子节点，r就是0咯）
+		v-&gt;key.remove(r); v-&gt;child.remove(r + 1); _size--;//删除e 以及其下两个外部节点之一
+		solveUnderflow(v);//如果有必要 旋转或者合并
+		return ture;
 
-<p>如果是运算数的话，就将运算数读入到运算数栈（利用readNumber函数，稍后讲）；</p>
-
-<p>如果是运算符的话，首先，如果刚开始执行循环的话，任何运算符都将入栈，直到遇到下一个运算符，利用orderBetween函数（稍后讲），判断栈顶运算符和当前字符串中运算符的优先级关系，如果栈顶运算符优先级小，将当前运算符入栈；如果栈顶运算符优先级大，此时分为两种状况，一元运算和二元运算，一元运算在我们的程序中其实只有一种，也就是阶乘。一元运算的话，将运算符和一个运算数取出进行运算。二元运算的话，将两个运算数和一个运算符在栈中取出，进行运算，要注意的是，进行运算时，要先将后出栈的运算数，也就是前一个运算数先进行运算。
-注意：当进行运算操作时，并不会继续读取字符串，而是会继续比较当前运算符与新的栈顶运算符（也就是栈中上一个运算符）的优先级关系
-程序如下</p>
+	}</pre></td></tr></table>
+</div>
+</div>
+<p>下溢处理</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt"> 1
@@ -467,123 +563,154 @@ const char pri[N_OPTR][N_OPTR] = {
 </span><span class="lnt">36
 </span><span class="lnt">37
 </span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">float evaluate(char* S, char*&amp; RPN)//同时转化为逆波兰表达式（后缀表达式）
-{
-	Stack&lt;float&gt; opnd; Stack&lt;char&gt; optr;//运算数栈 运算符栈
-	optr.push(&#39;0&#39;);//作为哨兵
-	while (!optr.empty())//只要不为空运算符栈
+<pre class="chroma">void solveUnderflow(BTNodePosi(T) v)//因删除而下溢之后的合并处理
 	{
-		if (isdigit(*S))
+		if ((_order + 1) / 2 &lt;= v-&gt;child.size()) return;//递归基 当前节点没有下溢
+		BTNodePosi(T) p = v-&gt;parent;
+		if (!p)//递归基 已经到了根节点
 		{
-			readNumber(S, opnd); append(RPN, opnd.top());//读入操作数
-		}
-		else//如果是运算符
-			switch (orderBetween(optr.top(), *S))//比较优先级高低
+			if (!v-&gt;key&amp;&amp;v-&gt;child[0])//如果v已经不含有关键码 但却有非空的孩子
 			{
-			case &#39;&lt;&#39;://如果栈顶优先级小，将新的运算符读入栈中，继续读取下一个字符
-				optr.push(*S); S++;
-				break;
-			case &#39;=&#39;://优先级相等的情况(当前运算符为右括号或者尾部哨兵\0)
-				optr.pop(); S++;//运算符脱离栈中 读取下一个字符
-				break;
-			case &#39;&gt;&#39;://如果栈顶运算符优先级大
-				{
-				char op = optr.pop();append(RPN,op);//栈顶运算符出栈
-				if (&#39;!&#39; == op)//一元运算 栈顶运算数出栈
-					{	
-						float pOpnd = opnd.pop();
-						opnd.push(calcu(op, pOpnd));
-					}
-				else//对于二元运算 栈顶运算数出栈两个
-					{
-					float pOpnd2 = opnd.pop(), pOpnd1 = opnd.pop();
-					opnd.push(calcu(pOpnd1, op, pOpnd2));//将后出栈的运算数放在计算的前面
-					}
-				break;
-				}
-			default: exit(-1);
-			}//switch
-	}//while
-	return opnd.pop();</pre></td></tr></table>
-</div>
-</div>
-<p>readNumber函数将当前字符及后续字符（如果有的话）读入栈中，代码如下，已有注释，此算法大体思路已经说明了
-orderBetween函数用来比较优先级</p>
+				_root = v-&gt;child[0]; _root-&gt;parent = NULL;//这个节点被跳过
+				v-&gt;child[0] = NULL; release(v);//并且因为不再有用被销毁
+			}//整树高度降低一层
+			return;
+		}
+		Rank r = 0; while (p-&gt;child[r] != v) v++;
+		//确定v是p的第几个孩子
 
-<p>readNumber函数</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">	void readNumber(char*&amp; p, Stack&lt;float&gt;&amp; stk)//将起始于p的字串解析为数值，并存入操作数栈中
-	{
-		stk.push((float)(*p - &#39;0&#39;));
-		while(isdigit(*(++p)))//后边只要紧跟的是数字
-			stk.push(stk.pop()*10+(*p-&#39;0&#39;));//上一位出栈并且乘以10，加上新的一位进栈
-		if (&#39;.&#39; != (*++p)) return;//不是小数点就出栈
-		float fraction = 1;//否则的话，有小数点存在
-		while (isdigit(*(++p)))
-			stk.push(stk.pop() + (*p - &#39;0&#39;) + (fraction /= 10));//利用fraction每次除以10，数位也降低一位
+
+
+		//情况1 ：向左兄弟借关键码
+		if (r &lt; 0)//如果v不是p的第一个孩子
+		{
+			BTNodePosi(T) ls = p-&gt;child[r - 1];//左兄弟肯定存在
+			if ((_order + 1) / 2 &lt; ls-&gt;child.size())//如果左兄弟足够胖
+			{
+				v-&gt;key.insert(0, p-&gt;key[r - 1]);//把比左兄弟最大的大一点的父亲节点的关键码给v
+				p-&gt;key[r - 1] = ls-&gt;key.remove(ls-&gt;key.size() - 1);//左兄弟节点最大的那个给父节点
+				v-&gt;child.insert(0, ls-&gt;child.remove(ls-&gt;child.size() - 1));//还要把孩子节点也过继给v
+				if (v-&gt;child[0]) v-&gt;child[0]-&gt;parent = v;//链接
+				return; //至此 通过右旋完成了当前层（以及所有层）的下溢处理
+			}
+				
+		}
+
+
+
+
+		//情况2：向右兄弟借关键码
+		if (p-&gt;child.size() - 1 &gt; r)//v不是p的最后一个孩子，那么右兄弟就存在
+		{
+			BTNodePosi(T) rs = p-&gt;child[r + 1];
+			if ((_order + 1) / 2 &lt; rs-&gt;child.size())//如果这个右兄弟足够胖
+			{
+				v-&gt;key.insert(key.size(), p-&gt;key[r]);//p把刚好第一个大于v最大元素的元素借给v作为v最大的元素
+				p-&gt;key[r] = rs-&gt;key.remove(0);//右兄弟的最小关键码转入p中
+				v-&gt;child.insert(child.size(), rs-&gt;child.remove(0));//rs的最左侧孩子也要过来
+				if (v-&gt;child[v-&gt;child.size() - 1])
+					v-&gt;child[v-&gt;child.size() - 1]-&gt;parent = v;//连接
+				return;
+			}
+		}
+
+
+
+		//情况3：左右兄弟要么为空 要么都太瘦 合并
+		if(0&lt;r)//有左兄弟存在 于左兄弟合并
+		{
+			BTNodePosi(T) ls = p-&gt;child[r - 1];
+			ls-&gt;key.insert(ls-&gt;key.size(), p-&gt;key.remove(r - 1)); p-&gt;child.remove(r);
+			//p的第r-1个关键码给左孩子（变成左孩子最大的关键码），v不再是p的第r个孩子
+			ls-&gt;child.insert(ls-&gt;child.size(), v - child.remove(0));//v的最左侧孩子给ls当做最右侧孩子
+			if (ls-&gt;child[ls-&gt;child.size() - 1])
+				ls-&gt;child[ls-&gt;child.size() - 1]-&gt;parent = ls;//连接
+			while (!v-&gt;empty())//把v里剩下关键码和孩子依次转入ls
+			{
+				ls-&gt;key.insert(ls-&gt;key.size(), v-&gt;key.remove(0));//关键码依次转入
+				ls-&gt;child.insert(ls-&gt;child.size(), v-&gt;child.remove(0));//孩子依次转入
+				if (ls-&gt;child[ls-&gt;child.size() - 1])
+					ls-&gt;child[ls-&gt;child.size() - 1]-&gt;parent = ls;//连接
+			}
+			release(v);
+		}//与左兄弟合并完成
+		else//没有左兄弟 只能与右兄弟合并
+		{
+			BTNodePosi(T) rs = p-&gt;child[r + 1];//右兄弟必存在
+			rs-&gt;key.insert(0, p-&gt;key.remove(r)); p-&gt;child.remove(r);
+			//p的第r个关键码转入rs v不再是p的第r个孩子
+			rs-&gt;child.insert(0, v-&gt;child.remove(v-&gt;child.size() - 1));//v的最右侧孩子给rs
+			if (rs-&gt;child[0])
+				rs-&gt;child[0]-&gt;parent = rs;//完成连接
+			while (!v-&gt;empty())//把v里剩下的关键码和孩子依次转入rs
+			{
+				rs-&gt;key.insert(0, v-&gt;key.remove(v-&gt;key.size() - 1));//转入关键码
+				rs-&gt;child.insert(0.v-&gt;child.remove(v-&gt;child.size() - 1));//转入孩子
+				if(rs-&gt;child[0])
+					rs-&gt;child[0]-&gt;parent = rs;//依次连接
+			}
+			release(v);
+
+		}
+		solveUnderflow(p);//合并会有下溢传播的风险 如有必要继续 所以递归 最多递归o（logn）层
+		return;
 	}</pre></td></tr></table>
-</div>
-</div>
-<p>orderBetween函数</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">Operator optr2rank(char op)
-{
-	switch (op)
-	{
-	case &#39;+&#39;:return ADD;
-	case &#39;-&#39;:return SUB;
-	case &#39;*&#39;:return MUL;
-	case &#39;/&#39;:return DIV;
-	case &#39;^&#39;:return POW;
-	case &#39;!&#39;:return FAC;
-	case &#39;(&#39;:return L_P;
-	case &#39;)&#39;:return R_P;
-	case &#39;\0&#39;:return EOE;
-	default:exit(-1);
-	}
-}
-char orderBetween(char op1, char op2)//比较两个运算符之间的关系
-{
-	return pri[optr2rank(op1)][optr2rank(op2)];
-}</pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -598,7 +725,7 @@ char orderBetween(char op1, char op2)//比较两个运算符之间的关系
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-      2019-10-26
+      2019-11-12
       
     </span>
   </p>
@@ -619,7 +746,7 @@ char orderBetween(char op1, char op2)//比较两个运算符之间的关系
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/move/">
+          <a class="prev" href="/post/redblck/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -629,12 +756,12 @@ char orderBetween(char op1, char op2)//比较两个运算符之间的关系
 </svg>
 
             </i>
-            <span class="prev-text nav-default">C&#43;&#43;之移动构造函数与移动赋值运算符</span>
+            <span class="prev-text nav-default">RedBlck-Tree</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
         
-          <a class="next" href="/post/c&#43;&#43;primer12.3/">
-            <span class="next-text nav-default">C&#43;&#43;Primer12</span>
+          <a class="next" href="/post/splaytree/">
+            <span class="next-text nav-default">SplayTree</span>
             <span class="prev-text nav-mobile">Next</span>
             
             <i class="iconfont">

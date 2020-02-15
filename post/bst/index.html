@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>栈的学习-中缀表达式求值及转换为后缀表达式 - </title>
+  <title>二叉搜索树 - </title>
   
 
 <meta name="renderer" content="webkit" />
@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="Kurisu" />
-  <meta name="description" content="中缀表达式求值及转换为后缀表达式  利用栈的延迟缓冲的特性 " />
+  <meta name="description" content="定义 任一节点r的左（右）子树中，所有节点（若存在）均小于（大于）r。 二叉搜索树是“循关键码访问” 任何数据结构的查找排序插入等都不要忘了每个节" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -35,7 +35,7 @@
 <meta name="generator" content="Hugo 0.58.3" />
 
 
-<link rel="canonical" href="https://example.org/post/datas/" />
+<link rel="canonical" href="https://example.org/post/bst/" />
 
 
 
@@ -59,38 +59,26 @@
 
 
 
-<meta property="og:title" content="栈的学习-中缀表达式求值及转换为后缀表达式" />
-<meta property="og:description" content="中缀表达式求值及转换为后缀表达式
-
-
-利用栈的延迟缓冲的特性
-" />
+<meta property="og:title" content="二叉搜索树" />
+<meta property="og:description" content="定义 任一节点r的左（右）子树中，所有节点（若存在）均小于（大于）r。 二叉搜索树是“循关键码访问” 任何数据结构的查找排序插入等都不要忘了每个节" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://example.org/post/datas/" />
-<meta property="article:published_time" content="2019-10-26T17:07:53+08:00" />
-<meta property="article:modified_time" content="2019-10-26T17:07:53+08:00" />
-<meta itemprop="name" content="栈的学习-中缀表达式求值及转换为后缀表达式">
-<meta itemprop="description" content="中缀表达式求值及转换为后缀表达式
+<meta property="og:url" content="https://example.org/post/bst/" />
+<meta property="article:published_time" content="2019-11-06T21:08:53+08:00" />
+<meta property="article:modified_time" content="2019-11-06T21:08:53+08:00" />
+<meta itemprop="name" content="二叉搜索树">
+<meta itemprop="description" content="定义 任一节点r的左（右）子树中，所有节点（若存在）均小于（大于）r。 二叉搜索树是“循关键码访问” 任何数据结构的查找排序插入等都不要忘了每个节">
 
 
-利用栈的延迟缓冲的特性
-">
-
-
-<meta itemprop="datePublished" content="2019-10-26T17:07:53&#43;08:00" />
-<meta itemprop="dateModified" content="2019-10-26T17:07:53&#43;08:00" />
-<meta itemprop="wordCount" content="1593">
+<meta itemprop="datePublished" content="2019-11-06T21:08:53&#43;08:00" />
+<meta itemprop="dateModified" content="2019-11-06T21:08:53&#43;08:00" />
+<meta itemprop="wordCount" content="935">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="栈的学习-中缀表达式求值及转换为后缀表达式"/>
-<meta name="twitter:description" content="中缀表达式求值及转换为后缀表达式
-
-
-利用栈的延迟缓冲的特性
-"/>
+<meta name="twitter:title" content="二叉搜索树"/>
+<meta name="twitter:description" content="定义 任一节点r的左（右）子树中，所有节点（若存在）均小于（大于）r。 二叉搜索树是“循关键码访问” 任何数据结构的查找排序插入等都不要忘了每个节"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -334,15 +322,15 @@
           <article class="post bg-white">
     
     <header class="post-header">
-      <h1 class="post-title">栈的学习-中缀表达式求值及转换为后缀表达式</h1>
+      <h1 class="post-title">二叉搜索树</h1>
       
       <div class="post-meta">
-        <time datetime="2019-10-26" class="post-time">
-          2019-10-26
+        <time datetime="2019-11-06" class="post-time">
+          2019-11-06
         </time>
         
-        <span class="more-meta"> 1593 words </span>
-          <span class="more-meta"> 4 min read </span>
+        <span class="more-meta"> 935 words </span>
+          <span class="more-meta"> 2 min read </span>
 
         
         
@@ -359,7 +347,20 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#中缀表达式求值及转换为后缀表达式">中缀表达式求值及转换为后缀表达式</a></li>
+<li>
+<ul>
+<li><a href="#定义">定义</a></li>
+<li><a href="#search-remove-insert接口">search remove insert接口</a>
+<ul>
+<li><a href="#平衡二叉搜索树-bbst">平衡二叉搜索树（BBST）</a>
+<ul>
+<li><a href="#avl树">AVL树</a>
+<ul>
+<li><a href="#插入与删除-首先理解zig与zag">插入与删除（首先理解zig与zag）</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
 </ul>
 </nav>
   </div>
@@ -367,225 +368,59 @@
 
     
     <div class="post-content">
-      <h1 id="中缀表达式求值及转换为后缀表达式">中缀表达式求值及转换为后缀表达式</h1>
+      
+
+<h2 id="定义">定义</h2>
 
 <ul>
-<li>利用栈的延迟缓冲的特性</li>
+<li>任一节点r的左（右）子树中，所有节点（若存在）均小于（大于）r。</li>
 </ul>
 
-<p>首先我们要将不同运算符之间的关系确定成一张二维表格</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">#define N_OPTR 9//运算总数  
-typedef enum{ADD,SUB,MUL,DIV,POW,FAC,L_P,R_P,EOE} Operator;
-//运算符优先关系二维表格
-const char pri[N_OPTR][N_OPTR] = {
-	/*				当前运算符                    */
-/*		         +    -    *    /    ^    !    (    )    \0 */
-/*	-- + */		&#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;,
-/*	|  - */		&#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;,
-/*	栈 * */		&#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;,
-/*	顶 / */		&#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;,
-/*	运 ^ */		&#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;,
-/*	算 ! */		&#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39; &#39;, &#39;&gt;&#39;, &#39;&gt;&#39;,
-/*	符 ( */		&#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;=&#39;, &#39; &#39;,
-/*	|  ) */		&#39; &#39;, &#39; &#39;, &#39; &#39;, &#39; &#39;, &#39; &#39;, &#39; &#39;, &#39; &#39;, &#39; &#39;, &#39; &#39;,
-/*	--\0 */		&#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39; &#39;, &#39;=&#39;
+<p>二叉搜索树是“循关键码访问”</p>
 
+<p>任何数据结构的查找排序插入等都不要忘了每个节点的前驱后缀，例如在二叉树中就是父亲节点左孩子右孩子节点等</p>
 
+<h2 id="search-remove-insert接口">search remove insert接口</h2>
 
+<p>search类似于二分查找。remove和insert都是基于search来实现</p>
 
-};</pre></td></tr></table>
-</div>
-</div>
-<p>然后写主程序，主程序的流程是这样的，我们需要一个运算符栈和一个运算数栈，先将一个&rsquo;\0&rsquo;入栈当做哨兵，然后已运算符栈不为空为条件当做循环，判断当前字符是运算数还是运算符。</p>
+<h3 id="平衡二叉搜索树-bbst">平衡二叉搜索树（BBST）</h3>
 
-<p>如果是运算数的话，就将运算数读入到运算数栈（利用readNumber函数，稍后讲）；</p>
+<ul>
+<li><p>概念：在二叉搜索树中，三种算法的时间复杂度均取决于树高，在随机情况下，树高为根号n，为了更快的效率，我们需要让二叉树适度的平衡</p>
 
-<p>如果是运算符的话，首先，如果刚开始执行循环的话，任何运算符都将入栈，直到遇到下一个运算符，利用orderBetween函数（稍后讲），判断栈顶运算符和当前字符串中运算符的优先级关系，如果栈顶运算符优先级小，将当前运算符入栈；如果栈顶运算符优先级大，此时分为两种状况，一元运算和二元运算，一元运算在我们的程序中其实只有一种，也就是阶乘。一元运算的话，将运算符和一个运算数取出进行运算。二元运算的话，将两个运算数和一个运算符在栈中取出，进行运算，要注意的是，进行运算时，要先将后出栈的运算数，也就是前一个运算数先进行运算。
-注意：当进行运算操作时，并不会继续读取字符串，而是会继续比较当前运算符与新的栈顶运算符（也就是栈中上一个运算符）的优先级关系
-程序如下</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">float evaluate(char* S, char*&amp; RPN)//同时转化为逆波兰表达式（后缀表达式）
-{
-	Stack&lt;float&gt; opnd; Stack&lt;char&gt; optr;//运算数栈 运算符栈
-	optr.push(&#39;0&#39;);//作为哨兵
-	while (!optr.empty())//只要不为空运算符栈
-	{
-		if (isdigit(*S))
-		{
-			readNumber(S, opnd); append(RPN, opnd.top());//读入操作数
-		}
-		else//如果是运算符
-			switch (orderBetween(optr.top(), *S))//比较优先级高低
-			{
-			case &#39;&lt;&#39;://如果栈顶优先级小，将新的运算符读入栈中，继续读取下一个字符
-				optr.push(*S); S++;
-				break;
-			case &#39;=&#39;://优先级相等的情况(当前运算符为右括号或者尾部哨兵\0)
-				optr.pop(); S++;//运算符脱离栈中 读取下一个字符
-				break;
-			case &#39;&gt;&#39;://如果栈顶运算符优先级大
-				{
-				char op = optr.pop();append(RPN,op);//栈顶运算符出栈
-				if (&#39;!&#39; == op)//一元运算 栈顶运算数出栈
-					{	
-						float pOpnd = opnd.pop();
-						opnd.push(calcu(op, pOpnd));
-					}
-				else//对于二元运算 栈顶运算数出栈两个
-					{
-					float pOpnd2 = opnd.pop(), pOpnd1 = opnd.pop();
-					opnd.push(calcu(pOpnd1, op, pOpnd2));//将后出栈的运算数放在计算的前面
-					}
-				break;
-				}
-			default: exit(-1);
-			}//switch
-	}//while
-	return opnd.pop();</pre></td></tr></table>
-</div>
-</div>
-<p>readNumber函数将当前字符及后续字符（如果有的话）读入栈中，代码如下，已有注释，此算法大体思路已经说明了
-orderBetween函数用来比较优先级</p>
+<h4 id="avl树">AVL树</h4></li>
 
-<p>readNumber函数</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">	void readNumber(char*&amp; p, Stack&lt;float&gt;&amp; stk)//将起始于p的字串解析为数值，并存入操作数栈中
-	{
-		stk.push((float)(*p - &#39;0&#39;));
-		while(isdigit(*(++p)))//后边只要紧跟的是数字
-			stk.push(stk.pop()*10+(*p-&#39;0&#39;));//上一位出栈并且乘以10，加上新的一位进栈
-		if (&#39;.&#39; != (*++p)) return;//不是小数点就出栈
-		float fraction = 1;//否则的话，有小数点存在
-		while (isdigit(*(++p)))
-			stk.push(stk.pop() + (*p - &#39;0&#39;) + (fraction /= 10));//利用fraction每次除以10，数位也降低一位
-	}</pre></td></tr></table>
-</div>
-</div>
-<p>orderBetween函数</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">Operator optr2rank(char op)
-{
-	switch (op)
-	{
-	case &#39;+&#39;:return ADD;
-	case &#39;-&#39;:return SUB;
-	case &#39;*&#39;:return MUL;
-	case &#39;/&#39;:return DIV;
-	case &#39;^&#39;:return POW;
-	case &#39;!&#39;:return FAC;
-	case &#39;(&#39;:return L_P;
-	case &#39;)&#39;:return R_P;
-	case &#39;\0&#39;:return EOE;
-	default:exit(-1);
-	}
-}
-char orderBetween(char op1, char op2)//比较两个运算符之间的关系
-{
-	return pri[optr2rank(op1)][optr2rank(op2)];
-}</pre></td></tr></table>
-</div>
-</div>
+<li><p>平衡因子 左右子树高度之差绝对值不能超过1</p></li>
+</ul>
+
+<h5 id="插入与删除-首先理解zig与zag">插入与删除（首先理解zig与zag）</h5>
+
+<ul>
+<li>在AVL树种节点的插入与删除可能会使树变的不平衡，我们为了防止在执行算法之后树失衡，需要对其进行重平衡</li>
+<li>zig与zag是涉及到失衡节点集合三个主要节点的逆时针与顺时针旋转</li>
+</ul>
+
+<ol>
+<li>插入算法（insert）</li>
+<li>AVL树的插入算法与BST插入算法开始一样，将节点插入进去然后size++，但是不同的是，我们为了树依然保持平衡，需要从插入节点的父亲开始自下而上的去寻找第一个失衡的节点，一旦找到失衡的节点，我们利用3+4重构（马上讲）将其平衡，然后跳出。在循环中，如果不是失衡的节点，我们要对这个节点的高度进行更新（因为即使没有失衡，高度也有可能变化）</li>
+
+<li><p>返回新插入的节点</p></li>
+
+<li><p>删除算法（remove）</p></li>
+
+<li><p>remove与insert不同的是，我们插入一个节点后，重平衡后全树的高度是不变的，但是删除不同，当我们删除一个节点然后重平衡后，被删除节点所属的祖先子树的高度会降低，这就导致祖先子树可能会失衡，进而向上扩散，被称为 失衡传播</p></li>
+</ol>
+
+<ul>
+<li>所以我们要实现remove算法，先对其进行removeAt操作后，对其进行重平衡的循坏中，从被删除的节点的父亲出发，向上遍历知道最后，每次遇到失衡节点都要对其进行重平衡，而且对每个节点（不管是不是失衡）都要更新高度</li>
+</ul>
+
+<ol>
+<li>3+4算法以及使用</li>
+<li>其实我们每次重平衡的最终目的还是要让这一局部节点按照中序遍历的次序排列，所以我们只需要对这个局部的节点进行3+4重构，三个节点，四个叶子。connect（）函数的七个参数，对应三个节点四个叶子，对这些节点的关系进行重新组装。然后我们根据是zigzig还是zagzag还是zigzag还是。。。就可以进行重平衡了</li>
+</ol>
+
     </div>
 
     
@@ -598,7 +433,7 @@ char orderBetween(char op1, char op2)//比较两个运算符之间的关系
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-      2019-10-26
+      2019-11-06
       
     </span>
   </p>
@@ -619,7 +454,7 @@ char orderBetween(char op1, char op2)//比较两个运算符之间的关系
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/move/">
+          <a class="prev" href="/post/splaytree/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -629,12 +464,12 @@ char orderBetween(char op1, char op2)//比较两个运算符之间的关系
 </svg>
 
             </i>
-            <span class="prev-text nav-default">C&#43;&#43;之移动构造函数与移动赋值运算符</span>
+            <span class="prev-text nav-default">SplayTree</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
         
-          <a class="next" href="/post/c&#43;&#43;primer12.3/">
-            <span class="next-text nav-default">C&#43;&#43;Primer12</span>
+          <a class="next" href="/post/graph/">
+            <span class="next-text nav-default">数据结构学习-图</span>
             <span class="prev-text nav-mobile">Next</span>
             
             <i class="iconfont">

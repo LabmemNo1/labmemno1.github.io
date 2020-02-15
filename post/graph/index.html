@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>栈的学习-中缀表达式求值及转换为后缀表达式 - </title>
+  <title>数据结构学习-图 - </title>
   
 
 <meta name="renderer" content="webkit" />
@@ -23,7 +23,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 
 <meta name="author" content="Kurisu" />
-  <meta name="description" content="中缀表达式求值及转换为后缀表达式  利用栈的延迟缓冲的特性 " />
+  <meta name="description" content="前言-记录我的学习，图的概念什么的就不在文章中说了，只在此记录图的抽象数据类型的实现以及各种算法 图与邻接矩阵 图的模板类中只是定义了边和顶点的" />
 
   <meta name="keywords" content="Hugo, theme, jane" />
 
@@ -35,7 +35,7 @@
 <meta name="generator" content="Hugo 0.58.3" />
 
 
-<link rel="canonical" href="https://example.org/post/datas/" />
+<link rel="canonical" href="https://example.org/post/graph/" />
 
 
 
@@ -59,38 +59,26 @@
 
 
 
-<meta property="og:title" content="栈的学习-中缀表达式求值及转换为后缀表达式" />
-<meta property="og:description" content="中缀表达式求值及转换为后缀表达式
-
-
-利用栈的延迟缓冲的特性
-" />
+<meta property="og:title" content="数据结构学习-图" />
+<meta property="og:description" content="前言-记录我的学习，图的概念什么的就不在文章中说了，只在此记录图的抽象数据类型的实现以及各种算法 图与邻接矩阵 图的模板类中只是定义了边和顶点的" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://example.org/post/datas/" />
-<meta property="article:published_time" content="2019-10-26T17:07:53+08:00" />
-<meta property="article:modified_time" content="2019-10-26T17:07:53+08:00" />
-<meta itemprop="name" content="栈的学习-中缀表达式求值及转换为后缀表达式">
-<meta itemprop="description" content="中缀表达式求值及转换为后缀表达式
+<meta property="og:url" content="https://example.org/post/graph/" />
+<meta property="article:published_time" content="2019-11-03T18:53:40+08:00" />
+<meta property="article:modified_time" content="2019-11-03T18:53:40+08:00" />
+<meta itemprop="name" content="数据结构学习-图">
+<meta itemprop="description" content="前言-记录我的学习，图的概念什么的就不在文章中说了，只在此记录图的抽象数据类型的实现以及各种算法 图与邻接矩阵 图的模板类中只是定义了边和顶点的">
 
 
-利用栈的延迟缓冲的特性
-">
-
-
-<meta itemprop="datePublished" content="2019-10-26T17:07:53&#43;08:00" />
-<meta itemprop="dateModified" content="2019-10-26T17:07:53&#43;08:00" />
-<meta itemprop="wordCount" content="1593">
+<meta itemprop="datePublished" content="2019-11-03T18:53:40&#43;08:00" />
+<meta itemprop="dateModified" content="2019-11-03T18:53:40&#43;08:00" />
+<meta itemprop="wordCount" content="1240">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="栈的学习-中缀表达式求值及转换为后缀表达式"/>
-<meta name="twitter:description" content="中缀表达式求值及转换为后缀表达式
-
-
-利用栈的延迟缓冲的特性
-"/>
+<meta name="twitter:title" content="数据结构学习-图"/>
+<meta name="twitter:description" content="前言-记录我的学习，图的概念什么的就不在文章中说了，只在此记录图的抽象数据类型的实现以及各种算法 图与邻接矩阵 图的模板类中只是定义了边和顶点的"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -334,15 +322,15 @@
           <article class="post bg-white">
     
     <header class="post-header">
-      <h1 class="post-title">栈的学习-中缀表达式求值及转换为后缀表达式</h1>
+      <h1 class="post-title">数据结构学习-图</h1>
       
       <div class="post-meta">
-        <time datetime="2019-10-26" class="post-time">
-          2019-10-26
+        <time datetime="2019-11-03" class="post-time">
+          2019-11-03
         </time>
         
-        <span class="more-meta"> 1593 words </span>
-          <span class="more-meta"> 4 min read </span>
+        <span class="more-meta"> 1240 words </span>
+          <span class="more-meta"> 3 min read </span>
 
         
         
@@ -359,7 +347,14 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#中缀表达式求值及转换为后缀表达式">中缀表达式求值及转换为后缀表达式</a></li>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#图与邻接矩阵">图与邻接矩阵</a></li>
+<li><a href="#图的遍历">图的遍历</a></li>
+</ul></li>
+</ul></li>
 </ul>
 </nav>
   </div>
@@ -367,13 +362,40 @@
 
     
     <div class="post-content">
-      <h1 id="中缀表达式求值及转换为后缀表达式">中缀表达式求值及转换为后缀表达式</h1>
+      
+
+<p>前言-记录我的学习，图的概念什么的就不在文章中说了，只在此记录图的抽象数据类型的实现以及各种算法</p>
+
+<h3 id="图与邻接矩阵">图与邻接矩阵</h3>
 
 <ul>
-<li>利用栈的延迟缓冲的特性</li>
+<li><p>图的模板类中只是定义了边和顶点的数量，引入向量和图两个类，首先对顶点我们定义一个类，保存每个顶点的各种信息（数据、出入度数、状态、时间标签、父节点以及优先级数）</p></li>
+
+<li><p>然后对于边我们也定义一个类，保存有边的各种信息（数据、权重、类型）</p></li>
+
+<li><p>这样，我们就可以定义邻接矩阵模板类了，为什么要用邻接矩阵或者关联矩阵来保存图的各种信息呢？这就是抽象数据类型了，一张图的全部信息，就在这个邻接矩阵里面保存着，在邻接矩阵类中，用向量（Vector）来存放所有的顶点和边，边使用一个二维向量（可以理解为向量的向量）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">Vector&lt;Vertex&lt;Tv&gt;&gt; V;//顶点集（向量）
+Vector&lt;Vector&lt;Edge&lt;Te&gt;* &gt; &gt; E;//边集（邻接矩阵） n个顶点n条边</pre></td></tr></table>
+</div>
+</div></li>
 </ul>
 
-<p>首先我们要将不同运算符之间的关系确定成一张二维表格</p>
+<h3 id="图的遍历">图的遍历</h3>
+
+<ul>
+<li>广度优先搜索（BFS），树的层次遍历是广度优先搜索的特例。意思是由里向外，逐层递进，父与子连线而同级之间不连线</li>
+</ul>
+
+<p>对单个连通域来说- 先引入一个辅助队列，向队列存入起点，起点的状态要设置为DISCOVERED，然后直到栈为空，利用邻接矩阵中的firstNbr和nextNbr接口枚举v的所有邻居u。
+如果u是未被发现的状态，把u的状态变为已发现，将u存入队列中，并且将（v，u）这条边的状态设置为树类型，将u的父节点变为v。
+如果u是其他状态，那么就相当于u是v的同级或者u已经是v的子节点
+在while循环外边将顶点v的状态变为VISITED</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt"> 1
@@ -396,37 +418,46 @@
 </span><span class="lnt">18
 </span><span class="lnt">19
 </span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">#define N_OPTR 9//运算总数  
-typedef enum{ADD,SUB,MUL,DIV,POW,FAC,L_P,R_P,EOE} Operator;
-//运算符优先关系二维表格
-const char pri[N_OPTR][N_OPTR] = {
-	/*				当前运算符                    */
-/*		         +    -    *    /    ^    !    (    )    \0 */
-/*	-- + */		&#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;,
-/*	|  - */		&#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;,
-/*	栈 * */		&#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;,
-/*	顶 / */		&#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;,
-/*	运 ^ */		&#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;,
-/*	算 ! */		&#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39;&gt;&#39;, &#39; &#39;, &#39;&gt;&#39;, &#39;&gt;&#39;,
-/*	符 ( */		&#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;=&#39;, &#39; &#39;,
-/*	|  ) */		&#39; &#39;, &#39; &#39;, &#39; &#39;, &#39; &#39;, &#39; &#39;, &#39; &#39;, &#39; &#39;, &#39; &#39;, &#39; &#39;,
-/*	--\0 */		&#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39;&lt;&#39;, &#39; &#39;, &#39;=&#39;
+<pre class="chroma">template&lt;typename Tv, typename Te&gt;//类似于树的层次遍历
+inline void Graph&lt;Tv, Te&gt;::BFS(int v, int &amp;clock)//对一个顶点进行广度优先遍历 clock计数
+{
+	Queue&lt;int&gt; Q;
+	status(v) = DISCOVERED;
+	Q.enqueue(v);
+	while (!Q.empty())
+	{
+		int v = Q.dequeue();
+		dTime(v) = ++clock;//计数
+		for (int u = firstNbr(v); u &gt; -1; u = nextNbr(v, u))
+			if(status(u)==UNDISCOVERED)
+			{
+				status(u) = DISCOVERED;
+				Q.enqueue(u);
+				type(u, v) = TREE;
+				parent(u) = v;
+			}
+			else
+				type(u, v) = CROSS;
 
 
+			status(v) = VISITED;
+	}
 
-
-};</pre></td></tr></table>
+}</pre></td></tr></table>
 </div>
 </div>
-<p>然后写主程序，主程序的流程是这样的，我们需要一个运算符栈和一个运算数栈，先将一个&rsquo;\0&rsquo;入栈当做哨兵，然后已运算符栈不为空为条件当做循环，判断当前字符是运算数还是运算符。</p>
-
-<p>如果是运算数的话，就将运算数读入到运算数栈（利用readNumber函数，稍后讲）；</p>
-
-<p>如果是运算符的话，首先，如果刚开始执行循环的话，任何运算符都将入栈，直到遇到下一个运算符，利用orderBetween函数（稍后讲），判断栈顶运算符和当前字符串中运算符的优先级关系，如果栈顶运算符优先级小，将当前运算符入栈；如果栈顶运算符优先级大，此时分为两种状况，一元运算和二元运算，一元运算在我们的程序中其实只有一种，也就是阶乘。一元运算的话，将运算符和一个运算数取出进行运算。二元运算的话，将两个运算数和一个运算符在栈中取出，进行运算，要注意的是，进行运算时，要先将后出栈的运算数，也就是前一个运算数先进行运算。
-注意：当进行运算操作时，并不会继续读取字符串，而是会继续比较当前运算符与新的栈顶运算符（也就是栈中上一个运算符）的优先级关系
-程序如下</p>
+<ul>
+<li><p>深度优先搜索（DFS）
+简单来说你就是沿着一个节点逐层往深处访问，直到无法访问就回溯到上一层节点，直到最后全都访问完毕
+逻辑上，给正在访问的节点加一个dTime标签并且设置为DISCOVERED状态，表示正在访问，给访问完毕的节点的状态设置为VISITED并且加上fTime标签，这样，就能轻松的分清各个节点的父子（祖先后代）关系</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><span class="lnt"> 1
@@ -462,130 +493,45 @@ const char pri[N_OPTR][N_OPTR] = {
 </span><span class="lnt">31
 </span><span class="lnt">32
 </span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
 </span></pre></td>
 <td class="lntd">
-<pre class="chroma">float evaluate(char* S, char*&amp; RPN)//同时转化为逆波兰表达式（后缀表达式）
+<pre class="chroma">template&lt;typename Tv, typename Te&gt;
+inline void Graph&lt;Tv, Te&gt;::dfs(int s)
 {
-	Stack&lt;float&gt; opnd; Stack&lt;char&gt; optr;//运算数栈 运算符栈
-	optr.push(&#39;0&#39;);//作为哨兵
-	while (!optr.empty())//只要不为空运算符栈
-	{
-		if (isdigit(*S))
-		{
-			readNumber(S, opnd); append(RPN, opnd.top());//读入操作数
-		}
-		else//如果是运算符
-			switch (orderBetween(optr.top(), *S))//比较优先级高低
-			{
-			case &#39;&lt;&#39;://如果栈顶优先级小，将新的运算符读入栈中，继续读取下一个字符
-				optr.push(*S); S++;
-				break;
-			case &#39;=&#39;://优先级相等的情况(当前运算符为右括号或者尾部哨兵\0)
-				optr.pop(); S++;//运算符脱离栈中 读取下一个字符
-				break;
-			case &#39;&gt;&#39;://如果栈顶运算符优先级大
-				{
-				char op = optr.pop();append(RPN,op);//栈顶运算符出栈
-				if (&#39;!&#39; == op)//一元运算 栈顶运算数出栈
-					{	
-						float pOpnd = opnd.pop();
-						opnd.push(calcu(op, pOpnd));
-					}
-				else//对于二元运算 栈顶运算数出栈两个
-					{
-					float pOpnd2 = opnd.pop(), pOpnd1 = opnd.pop();
-					opnd.push(calcu(pOpnd1, op, pOpnd2));//将后出栈的运算数放在计算的前面
-					}
-				break;
-				}
-			default: exit(-1);
-			}//switch
-	}//while
-	return opnd.pop();</pre></td></tr></table>
-</div>
-</div>
-<p>readNumber函数将当前字符及后续字符（如果有的话）读入栈中，代码如下，已有注释，此算法大体思路已经说明了
-orderBetween函数用来比较优先级</p>
-
-<p>readNumber函数</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">	void readNumber(char*&amp; p, Stack&lt;float&gt;&amp; stk)//将起始于p的字串解析为数值，并存入操作数栈中
-	{
-		stk.push((float)(*p - &#39;0&#39;));
-		while(isdigit(*(++p)))//后边只要紧跟的是数字
-			stk.push(stk.pop()*10+(*p-&#39;0&#39;));//上一位出栈并且乘以10，加上新的一位进栈
-		if (&#39;.&#39; != (*++p)) return;//不是小数点就出栈
-		float fraction = 1;//否则的话，有小数点存在
-		while (isdigit(*(++p)))
-			stk.push(stk.pop() + (*p - &#39;0&#39;) + (fraction /= 10));//利用fraction每次除以10，数位也降低一位
-	}</pre></td></tr></table>
-</div>
-</div>
-<p>orderBetween函数</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span></pre></td>
-<td class="lntd">
-<pre class="chroma">Operator optr2rank(char op)
-{
-	switch (op)
-	{
-	case &#39;+&#39;:return ADD;
-	case &#39;-&#39;:return SUB;
-	case &#39;*&#39;:return MUL;
-	case &#39;/&#39;:return DIV;
-	case &#39;^&#39;:return POW;
-	case &#39;!&#39;:return FAC;
-	case &#39;(&#39;:return L_P;
-	case &#39;)&#39;:return R_P;
-	case &#39;\0&#39;:return EOE;
-	default:exit(-1);
-	}
+	reset();
+	int clock = 0;
+	int v = s;
+	do//逐一检查所有顶点
+		if (UNDISCOVERED == status(v))
+			DFS(v, clock);
+	while (s != (v = (++v%n)));
 }
-char orderBetween(char op1, char op2)//比较两个运算符之间的关系
+
+template&lt;typename Tv, typename Te&gt;
+inline void Graph&lt;Tv, Te&gt;::DFS(int v, int &amp;clock)//深度优先搜索
 {
-	return pri[optr2rank(op1)][optr2rank(op2)];
+	dTime(v) = ++clock; status(v) = DISCOVERED;
+	for (int u = firstNbr(v); u &gt; -1; u = nextNbr(v, u))
+	{
+		switch(status(u))//视u的状态分别处理
+			case UNDISCOVERED://未被发现的状态，往深的地方一直递归下去
+				type(v, u) = TREE;
+				parent(u) = v;
+				DFS(u, clock);//递归
+				break;
+			case DISCOVERED://如果是已经被发现的状态
+				type(v, u) = BACKWARD;//回边 后来发现的边找到了之前已经遍历过的
+				break
+			default://u已经访问完毕(有向图)，视其程承袭关系分为前后变或跨边
+				type(v, u) = (dTime(v) &lt; dTime(u)) ? FORWARD : CROSS; break;
+	}
+	status(v) = VISITED;
+	fTime(v) = ++clock;
 }</pre></td></tr></table>
 </div>
-</div>
+</div></li>
+</ul>
+
     </div>
 
     
@@ -598,7 +544,7 @@ char orderBetween(char op1, char op2)//比较两个运算符之间的关系
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-      2019-10-26
+      2019-11-03
       
     </span>
   </p>
@@ -619,7 +565,7 @@ char orderBetween(char op1, char op2)//比较两个运算符之间的关系
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/move/">
+          <a class="prev" href="/post/bst/">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -629,12 +575,12 @@ char orderBetween(char op1, char op2)//比较两个运算符之间的关系
 </svg>
 
             </i>
-            <span class="prev-text nav-default">C&#43;&#43;之移动构造函数与移动赋值运算符</span>
+            <span class="prev-text nav-default">二叉搜索树</span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
         
-          <a class="next" href="/post/c&#43;&#43;primer12.3/">
-            <span class="next-text nav-default">C&#43;&#43;Primer12</span>
+          <a class="next" href="/post/bintree/">
+            <span class="next-text nav-default">数据结构学习之BinaryTree</span>
             <span class="prev-text nav-mobile">Next</span>
             
             <i class="iconfont">
